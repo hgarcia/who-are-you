@@ -39,6 +39,28 @@ describe("privatePublicKey(store, null)", function () {
   });
 });
 
+describe("privatePublicKey(store, null)", function () {
+  var storeMock = {get: function (key, cb) { cb(new Error(), null); }};
+  var handler = whoareyou.privatePublicKey(storeMock, null);
+  it("if store get has an error should not authorize", function () {
+    var req = getRequest();
+    handler(req, {}, function () {
+      req.authorized.should.not.be.ok;
+    });
+  });
+});
+
+describe("privatePublicKey(store, null)", function () {
+  var storeMock = {get: function (key, cb) { cb(null, {secretKey: '098'}); }};
+  var handler = whoareyou.privatePublicKey(storeMock, null);
+  it("if token doesn't match should not authorize", function () {
+    var req = getRequest();
+    handler(req, {}, function () {
+      req.authorized.should.not.be.ok;
+    });
+  });
+});
+
 function getRequest() {
   return {
     headers: {
