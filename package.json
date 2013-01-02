@@ -1,0 +1,27 @@
+{
+  "name": "who-are-you",
+  "version": "0.1.0",
+  "description": "A connect middleware to provide private-public key authentication.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/*.tests.js -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hgarcia/who-are-you.git"
+  },
+  "devDependencies": {
+    "mocha": "1.7.4",
+    "should": "1.2.1",
+    "sinon": "1.5.2"
+  },
+  "keywords": [
+    "connect",
+    "authentication",
+    "private-public-key",
+    "restify",
+    "ExpressJs"
+  ],
+  "author": "Hernan Garcia <hernan@dynamicprogrammer.com> (http://dynamicprogrammer.com)",
+  "license": "MIT"
+}
