@@ -47,7 +47,7 @@ describe("privatePublicKey(store, custom)", function () {
     var handler = whoareyou.privatePublicKey(storeMock, getOptions());
     var req = getCustomRequest();
     handler(req, {}, function () {
-      storeMock.calledWith.should.eql(req.headers["X-api"]);
+      storeMock.calledWith.should.eql(req.headers["x-api"]);
     });
   });
   it("if token match should authorize", function () {
@@ -79,7 +79,7 @@ describe("privatePublicKey(store, null)", function () {
     var handler = whoareyou.privatePublicKey(storeMock, null);
     var req = getRequest();
     handler(req, {}, function () {
-      storeMock.calledWith.should.eql(req.headers["X-api-key"]);
+      storeMock.calledWith.should.eql(req.headers["x-api-key"]);
     });
   });
   it("if store get has an error should not authorize", function () {
@@ -110,9 +110,9 @@ describe("privatePublicKey(store, null)", function () {
 
 function getOptions() {
   return {
-    "apiKey": "X-key",
-    "dateTime": "X-date",
-    "token": "X-hash"
+    "apiKey": "x-key",
+    "dateTime": "x-date",
+    "token": "x-hash"
   };
 }
 function getRequest() {
@@ -122,9 +122,9 @@ function getRequest() {
               .digest('hex');
   return {
     headers: {
-      "X-api-key": "accessKey",
-      "X-request-time": dateTime,
-      "X-token": hash
+      "x-api-key": "accessKey",
+      "x-request-time": dateTime,
+      "x-token": hash
     }
   };
 }
@@ -135,9 +135,9 @@ function getCustomRequest() {
               .digest('hex');
   return {
     headers: {
-      "X-key": "accessKey",
-      "X-date": dateTime,
-      "X-hash": hash
+      "x-key": "accessKey",
+      "x-date": dateTime,
+      "x-hash": hash
     }
   };
 }

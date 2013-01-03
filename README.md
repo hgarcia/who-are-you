@@ -23,9 +23,9 @@ And using the default custom http headers:
 
 The client should send a request with the following headers:
 
-    X-api-key: 90ijUhj88uY
-    X-request-time: '1357169907984'
-    X-token: 'a001880c10e2a61231311b1b56cecd98c71a7fe4'
+    x-api-key: 90ijUhj88uY
+    x-request-time: '1357169907984'
+    x-token: 'a001880c10e2a61231311b1b56cecd98c71a7fe4'
 
 The hash is calculated (in node) using the crypto module.
 
