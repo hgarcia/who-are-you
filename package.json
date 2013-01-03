@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git://github.com/hgarcia/who-are-you.git"
   },
+  "dependencies": {
+    "cloneextend": "0.0.3"
+  },
   "devDependencies": {
     "mocha": "1.7.4",
     "should": "1.2.1",

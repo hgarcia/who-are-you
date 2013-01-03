@@ -56,6 +56,7 @@ describe("privatePublicKey(store, custom)", function () {
     var req = getCustomRequest();
     handler(req, {}, function () {
       req.authorized.should.be.ok;
+      req.currentAccount.secretKey.should.eql("hjk876AXk90");
     });
   });
 });
