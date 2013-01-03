@@ -1,6 +1,7 @@
 "use strict";
 var whoareyou = require('../index.js');
 var should = require('should');
+var crypto = require('crypto');
 var sinon = require('sinon');
 
 describe("privatePublicKey(null, null)", function () {
@@ -49,6 +50,14 @@ describe("privatePublicKey(store, custom)", function () {
       storeMock.calledWith.should.eql(req.headers["X-api"]);
     });
   });
+  it("if token match should authorize", function () {
+    storeMock = {get: function (key, cb) { cb(null, {secretKey: 'hjk876AXk90'}); }};
+    var handler = whoareyou.privatePublicKey(storeMock, getOptions());
+    var req = getCustomRequest();
+    handler(req, {}, function () {
+      req.authorized.should.be.ok;
+    });
+  });
 });
 
 describe("privatePublicKey(store, null)", function () {
@@ -88,6 +97,14 @@ describe("privatePublicKey(store, null)", function () {
       req.authorized.should.not.be.ok;
     });
   });
+  it("if token match should authorize", function () {
+    storeMock = {get: function (key, cb) { cb(null, {secretKey: 'hjk876AXk90'}); }};
+    var handler = whoareyou.privatePublicKey(storeMock, null);
+    var req = getRequest();
+    handler(req, {}, function () {
+      req.authorized.should.be.ok;
+    });
+  });
 });
 
 function getOptions() {
@@ -98,20 +115,28 @@ function getOptions() {
   };
 }
 function getRequest() {
+  var dateTime = (new Date()).toString();
+  var hash = crypto.createHmac('sha1', "hjk876AXk90")
+              .update(dateTime)
+              .digest('hex');
   return {
     headers: {
       "X-api-key": "accessKey",
-      "X-request-time": (new Date()).toString(),
-      "X-token": "calculated-token-with-private-key"
+      "X-request-time": dateTime,
+      "X-token": hash
     }
   };
 }
 function getCustomRequest() {
+  var dateTime = (new Date()).toString();
+  var hash = crypto.createHmac('sha1', "hjk876AXk90")
+              .update(dateTime)
+              .digest('hex');
   return {
     headers: {
       "X-key": "accessKey",
-      "X-date": (new Date()).toString(),
-      "X-hash": "00009"
+      "X-date": dateTime,
+      "X-hash": hash
     }
   };
 }
