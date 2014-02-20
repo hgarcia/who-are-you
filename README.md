@@ -1,6 +1,8 @@
 who-are-you
 ===========
 
+[![Build Status](https://travis-ci.org/hgarcia/who-are-you.png?branch=master)](https://travis-ci.org/hgarcia/who-are-you)
+
 Authentication module for connect using a private public key scheme.
 
 It reads a series of http headers and authorize (or not) the caller to access the API.
